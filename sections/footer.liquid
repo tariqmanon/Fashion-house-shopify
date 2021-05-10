@@ -1,0 +1,102 @@
+<footer class="footer section text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="social-media">
+
+            {% if section.settings.facebook !=blank %}
+            <li>
+              <a href="{{ section.settings.facebook }}">
+                <i class="fa fa-facebook-f"></i>
+              </a>
+            </li>
+
+            {% endif %}
+
+            {% if section.settings.instagram !=blank %}
+
+            <li>
+              <a href="{{ section.settings.instagram }}">
+                <i class="fa fa-instagram"></i>
+              </a>
+            </li>
+
+            {% endif %}
+
+            {% if section.settings.twitter !=blank %}
+            <li>
+              <a href="{{ section.settings.twitter }}">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+
+            {% endif %}
+
+            {% if section.settings.pinterest !=blank %}
+            <li>
+              <a href="{{ section.settings.pinterest }}">
+                <i class="fa fa-pinterest"></i>
+              </a>
+            </li>
+
+            {% endif %}
+          </ul>
+          <ul class="footer-menu">
+            {% for link in linklists[section.settings.footer_menu].links %}
+            <li>
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+
+            {% endfor %}
+          </ul>
+          <p class="copyright-text">{{ section.settings.copyright_info }}</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  {% schema %}
+
+    {
+      "name": "Footer",
+    "settings" : [
+      {
+        "type": "text",
+        "id": "facebook",
+        "label":"Facebook Link"
+      },
+
+      {
+        "type": "text",
+        "id": "instagram",
+        "label":"instagram Link"
+      },
+      {
+        "type": "text",
+        "id": "twitter",
+        "label":"Twitter Link"
+      },
+
+      {
+        "type": "text",
+        "id": "pinterest",
+        "label":"Pinterest Link"
+      },
+
+      {
+        "type": "link_list",
+        "id": "footer_menu",
+        "label": "Footer Menu"
+      },
+
+      {
+        "type": "text",
+        "id" : "copyright_info",
+        "label": "Copyright Information"
+      }
+
+      
+    ]
+    }
+
+  {% endschema %}

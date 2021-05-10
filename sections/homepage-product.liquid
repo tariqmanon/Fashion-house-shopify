@@ -1,0 +1,84 @@
+<section class="products section bg-gray">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title text-center">
+            <h2>{{section.settings.products_title}}</h2>
+          </div>
+        </div>
+
+        {% assign our_collection = collections[section.settings.products_collection] %}
+
+        <div class="row">
+
+        	
+
+        	{% for product in our_collection.products limit: section.settings.product_limit %}
+          
+          <div class="col-md-4">
+            <div class="product-item">
+              <div class="product-thumb">
+                <img class="img-responsive" src="{{ product.featured_image.src | img_url: "1920x" }}" alt="product-img">
+                <div class="preview-meta">
+                  <ul>
+                    <li>
+                      <a href="{{ product.url }}"><i class="fa fa-search"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-heart-o"></i></a>
+                    </li>
+                    <li>
+                      <form id="form-{{product.handle}}" action="/cart/add" method="POST">
+                        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                        <a onclick="document.getElementById('form-{{product.handle}}').submit()"><i class="fa fa-shopping-cart"></i></a>
+                      </form>
+                      
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="product-content">
+                <h4><a href="product-single.html">{{ product.title }}</a></h4>
+                <p class="price">{{ product.price | money }}</p>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% schema %}
+
+  {
+  	"name": "Hompage Products",
+  	"settings": [
+  		{
+  			"type": "text",
+  			"id": "products_title",
+  			"label": "Products Heading",
+  			"default":"Trending Products"
+  		},
+
+  		{
+  			"type": "collection",
+  			"id": "products_collection",
+  			"label": "Collection"
+  		},
+  		{
+  			"type": "range",
+  			"id": "product_limit",
+  			"label": "Product Limits",
+  			"min": 3,
+  			"max" : 9,
+  			"default": 6
+  		}
+  	]
+  }
+
+
+
+  {% endschema %}

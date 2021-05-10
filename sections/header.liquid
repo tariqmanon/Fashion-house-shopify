@@ -1,0 +1,60 @@
+ <section class="top-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <div class="contact-number">
+            {% if settings.phone_top != blank %}
+            <i class="fa fa-phone"></i>
+            <span>{{ settings.phone_top }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <!-- Site Logo -->
+          <div class="logo text-center">
+            <a href="">
+              <img style="height: 49px;" src="{{ settings.logo_img | img_url: '1920x' }}" class="img-fluid">
+              
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <ul class="top-menu list-inline float-right">
+
+            <li class="list-inline-item"><a href="/cart"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+
+            {% if shop.customer_accounts_enabled %}
+
+            {% if customer %}
+              <li class="list-inline-item"><a href="/account"><i class="fa fa-sign-in"></i>Your Account</a></li>
+              <li class="list-inline-item"><a href="/account"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+            {% else %}
+              <li class="list-inline-item"><a href="/account/login"><i class="fa fa-sign-in"></i>{{ 'Log in' | customer_login_link }}</a></li>
+
+             {% endif %}
+
+             {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% include "menu" %}
+
+{% schema %}
+  {
+    "name" : "Main Menu",
+    "settings": [
+      {
+        "type": "link_list",
+        "id"  : "main_linklist",
+        "label":"Menu",
+        "default": "main-menu"
+      }
+    ]
+  }
+
+{% endschema %}
